@@ -71,7 +71,7 @@ A modern e-commerce platform built with Flask.
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/JustLukaBraza/portfolio.git
+git clone https://github.com/JustLukaBraza/Modern-Developer-Portfolio.git
 ```
 
 2. Install dependencies:
