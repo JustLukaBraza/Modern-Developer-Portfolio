@@ -1,11 +1,10 @@
-// Initialize AOS
 AOS.init({
     duration: 800,
     once: true,
     offset: 100
 });
 
-// Theme Toggle
+
 const themeToggle = document.getElementById('themeToggle');
 const html = document.documentElement;
 const themeIcon = themeToggle.querySelector('i');
@@ -19,51 +18,56 @@ themeToggle.addEventListener('click', () => {
     
     localStorage.setItem('theme', newTheme);
     
-    // Add rotation animation
+    
     themeIcon.style.animation = 'rotate360 0.5s ease';
     setTimeout(() => {
         themeIcon.style.animation = '';
     }, 500);
 });
 
-// Check for saved theme preference
+
 const savedTheme = localStorage.getItem('theme') || 'dark';
 html.setAttribute('data-theme', savedTheme);
 themeIcon.className = savedTheme === 'dark' ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
 
-// Music Player Controls
-const music = document.getElementById('bgMusic');
-const musicToggle = document.getElementById('musicToggle');
+
+const musicBtn = document.getElementById('musicToggle');
+const musicIcon = musicBtn.querySelector('i');
 let isMusicPlaying = false;
 
-// Set initial volume
-music.volume = 0.5;
 
-// Function to play music
-function playMusic() {
-    music.play().then(() => {
-        isMusicPlaying = true;
-        musicToggle.querySelector('i').classList.remove('fa-music');
-        musicToggle.querySelector('i').classList.add('fa-volume-high');
-        musicToggle.classList.add('playing');
-        localStorage.setItem('musicPlaying', 'true');
-    }).catch(error => {
-        console.log('Autoplay prevented:', error);
-    });
+const audio = new Audio('/static/music/dasi.mp3');
+audio.loop = true;
+
+
+const wasMusicPlaying = localStorage.getItem('musicPlaying') === 'true';
+if (wasMusicPlaying) {
+    isMusicPlaying = true;
+    audio.play();
+    musicIcon.classList.remove('fa-play');
+    musicIcon.classList.add('fa-pause');
+    musicBtn.classList.add('playing');
 }
 
-// Function to pause music
+function playMusic() {
+    audio.play();
+    isMusicPlaying = true;
+    musicIcon.classList.remove('fa-play');
+    musicIcon.classList.add('fa-pause');
+    musicBtn.classList.add('playing');
+    localStorage.setItem('musicPlaying', 'true');
+}
+
 function pauseMusic() {
-    music.pause();
+    audio.pause();
     isMusicPlaying = false;
-    musicToggle.querySelector('i').classList.remove('fa-volume-high');
-    musicToggle.querySelector('i').classList.add('fa-music');
-    musicToggle.classList.remove('playing');
+    musicIcon.classList.remove('fa-pause');
+    musicIcon.classList.add('fa-play');
+    musicBtn.classList.remove('playing');
     localStorage.setItem('musicPlaying', 'false');
 }
 
-// Add click event listener to music toggle button
-musicToggle.addEventListener('click', () => {
+musicBtn.addEventListener('click', () => {
     if (isMusicPlaying) {
         pauseMusic();
     } else {
@@ -71,39 +75,48 @@ musicToggle.addEventListener('click', () => {
     }
 });
 
-// Check if music was playing before
-if (localStorage.getItem('musicPlaying') === 'true') {
-    playMusic();
-}
 
-// Add click event listener to document to start music on first interaction
-document.addEventListener('click', function startMusic() {
+document.addEventListener('touchstart', function() {
     if (!isMusicPlaying) {
         playMusic();
-        document.removeEventListener('click', startMusic);
     }
 }, { once: true });
 
-// Enhanced Contact Form
+
+document.addEventListener('visibilitychange', function() {
+    if (document.hidden) {
+        if (isMusicPlaying) {
+            pauseMusic();
+        }
+    } else {
+        if (wasMusicPlaying) {
+            playMusic();
+        }
+    }
+});
+
+
 const contactForm = document.getElementById('contactForm');
 const formGroups = document.querySelectorAll('.form-group');
 
-// Add floating label effect
+
 formGroups.forEach(group => {
     const input = group.querySelector('input, textarea');
     const label = group.querySelector('label');
     
     input.addEventListener('focus', () => {
         label.classList.add('active');
+        group.classList.add('focused');
     });
     
     input.addEventListener('blur', () => {
         if (!input.value) {
             label.classList.remove('active');
+            group.classList.remove('focused');
         }
     });
     
-    // Check if input has value on page load
+    
     if (input.value) {
         label.classList.add('active');
     }
@@ -127,10 +140,11 @@ contactForm.addEventListener('submit', async (e) => {
             submitBtn.innerHTML = '<i class="fa-solid fa-check"></i>';
             contactForm.reset();
             
-            // Reset all labels
+            
             formGroups.forEach(group => {
                 const label = group.querySelector('label');
                 label.classList.remove('active');
+                group.classList.remove('focused');
             });
             
             setTimeout(() => {
@@ -146,14 +160,15 @@ contactForm.addEventListener('submit', async (e) => {
     }
 });
 
-// Enhanced Particle Animation
+
 const particles = document.querySelectorAll('.particle');
 particles.forEach(particle => {
     particle.style.animationDelay = Math.random() * 5 + 's';
     particle.style.opacity = Math.random() * 0.5 + 0.2;
+    particle.style.transform = `scale(${Math.random() * 0.5 + 0.5})`;
 });
 
-// Add scroll progress indicator
+
 const scrollProgress = document.createElement('div');
 scrollProgress.className = 'scroll-progress';
 document.body.appendChild(scrollProgress);
@@ -164,7 +179,7 @@ window.addEventListener('scroll', () => {
     scrollProgress.style.width = `${scrolled}%`;
 });
 
-// Add smooth scroll for anchor links
+
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -178,13 +193,95 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Add hover effect for project cards
+
 document.querySelectorAll('.project-card').forEach(card => {
     card.addEventListener('mouseenter', () => {
         card.style.transform = 'translateY(-10px) scale(1.02)';
+        card.style.boxShadow = '0 20px 40px rgba(0, 0, 0, 0.2)';
     });
     
     card.addEventListener('mouseleave', () => {
         card.style.transform = 'translateY(0) scale(1)';
+        card.style.boxShadow = '';
+    });
+});
+
+
+const langButtons = document.querySelectorAll('.lang-btn');
+const translations = {
+    en: {
+        bio: 'Python Developer & Game Creator',
+        skills: 'Skills',
+        projects: 'Projects',
+        contact: 'Contact Me',
+        name: 'Name',
+        email: 'Email',
+        message: 'Message',
+        send: 'Send Message',
+        loading: 'Loading...',
+        madeBy: 'Made with'
+    },
+    ka: {
+        bio: 'პითონ დეველოპერი და თამაშების შემქმნელი',
+        skills: 'უნარები',
+        projects: 'პროექტები',
+        contact: 'დაკავშირება',
+        name: 'სახელი',
+        email: 'ელ-ფოსტა',
+        message: 'შეტყობინება',
+        send: 'გაგზავნა',
+        loading: 'იტვირთება...',
+        madeBy: 'შექმნა'
+    }
+};
+
+let currentLang = localStorage.getItem('language') || 'en';
+
+function updateLanguage(lang) {
+    currentLang = lang;
+    localStorage.setItem('language', lang);
+    
+    
+    document.querySelector('.bio').textContent = translations[lang].bio;
+    document.querySelector('.section-title:nth-of-type(1)').textContent = translations[lang].skills;
+    document.querySelector('.section-title:nth-of-type(2)').textContent = translations[lang].projects;
+    document.querySelector('.section-title:nth-of-type(3)').textContent = translations[lang].contact;
+    document.querySelector('label[for="name"]').textContent = translations[lang].name;
+    document.querySelector('label[for="email"]').textContent = translations[lang].email;
+    document.querySelector('label[for="message"]').textContent = translations[lang].message;
+    document.querySelector('.submit-btn span').textContent = translations[lang].send;
+    document.querySelector('.loading-screen p').textContent = translations[lang].loading;
+    document.querySelector('.footer-content p').textContent = `${translations[lang].madeBy} <i class="fa-solid fa-heart"></i> by <span class="creator-name">JustLukaBraza</span>`;
+    
+    
+    langButtons.forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.lang === lang);
+    });
+}
+
+langButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+        updateLanguage(btn.dataset.lang);
+    });
+});
+
+
+updateLanguage(currentLang);
+
+
+const scrollToTop = document.querySelector('.scroll-to-top');
+
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) {
+        scrollToTop.classList.add('visible');
+    } else {
+        scrollToTop.classList.remove('visible');
+    }
+});
+
+scrollToTop.addEventListener('click', () => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
     });
 }); 

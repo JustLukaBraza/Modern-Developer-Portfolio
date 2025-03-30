@@ -10,7 +10,7 @@ def index():
 @app.route('/contact', methods=['POST'])
 def contact():
     data = request.form
-    # Here you can add your email sending logic or database storage
+    
     return jsonify({'status': 'success', 'message': 'Message sent successfully!'})
 
 if __name__ == '__main__':

@@ -1,55 +1,57 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
+
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- SEO Meta Tags -->
+
     <title>JustLukaBraza - Modern Developer Portfolio</title>
-    <meta name="description" content="Modern portfolio showcasing innovative projects in Python, Web Development, and Flask by JustLukaBraza." />
+    <meta name="description"
+        content="Modern portfolio showcasing innovative projects in Python, Web Development, and Flask by JustLukaBraza." />
     <meta name="keywords" content="JustLukaBraza, Python Developer, Web Developer, Flask, Games, Web Applications" />
     <meta name="author" content="JustLukaBraza" />
     <meta name="robots" content="index, follow" />
 
-    <!-- Open Graph Meta Tags -->
+
     <meta property="og:title" content="JustLukaBraza - Modern Developer Portfolio" />
-    <meta property="og:description" content="Explore innovative projects in Python, Web Development, and Flask by JustLukaBraza." />
-    <meta property="og:image" content="https://cdn.discordapp.com/avatars/850710751462031360/d484afecb8fbd23153b5d44d49e72e27.webp?size=80" />
+    <meta property="og:description"
+        content="Explore innovative projects in Python, Web Development, and Flask by JustLukaBraza." />
+    <meta property="og:image"
+        content="https://cdn.discordapp.com/avatars/850710751462031360/d484afecb8fbd23153b5d44d49e72e27.webp?size=80" />
     <meta property="og:url" content="https://github.com/JustLukaBraza" />
     <meta property="og:type" content="website" />
 
-    <!-- Favicon -->
+
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/favicon.png') }}" />
 
-    <!-- Fonts & Styles -->
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
 </head>
 
 <body>
     <script src="https://kit.fontawesome.com/69a4d56f18.js" crossorigin="anonymous"></script>
-    
-    <!-- Background Music Player -->
+
+
     <div class="music-player">
-        <audio id="bgMusic" loop autoplay muted>
-            <source src="https://r2.guns.lol/be95f5c7-cdd9-4313-8d4f-7dcda93a953a.mp3" type="audio/mpeg">
-            Your browser does not support the audio element.
-        </audio>
         <div class="music-controls">
-            <button id="musicToggle" class="music-btn">
-                <i class="fa-solid fa-music"></i>
+            <button class="music-btn" id="musicToggle">
+                <i class="fa-solid fa-play"></i>
             </button>
-            <div class="music-info">
-                <span class="music-title">IV დასი - მორიგი სესია</span>
-            </div>
+        </div>
+        <div class="music-info">
+            <div class="music-title">IV დასი - მორიგი სესია            </div>
+            <div class="music-artist">JustLukaBraza</div>
         </div>
     </div>
 
-    <!-- Animated Background -->
+
     <div class="animated-background">
         <div class="particle"></div>
         <div class="particle"></div>
@@ -59,16 +61,22 @@
     </div>
 
     <div class="container">
-        <!-- Profile Section -->
+
         <section class="profile-section">
             <div class="profile-card">
                 <div class="profile-image">
-                    <img src="https://cdn.discordapp.com/avatars/850710751462031360/d484afecb8fbd23153b5d44d49e72e27.webp?size=80" alt="JustLukaBraza" />
+                    <img src="https://cdn.discordapp.com/avatars/850710751462031360/d484afecb8fbd23153b5d44d49e72e27.webp?size=80"
+                        alt="JustLukaBraza" />
                     <div class="status-badge"></div>
                 </div>
                 <h1 class="nickname">JustLukaBraza</h1>
                 <p class="bio">Python Developer & Game Creator</p>
-                
+
+                <div class="language-switcher">
+                    <button class="lang-btn active" data-lang="en">EN</button>
+                    <button class="lang-btn" data-lang="ka">ქარ</button>
+                </div>
+
                 <div class="social-links">
                     <a href="https://github.com/JustLukaBraza" target="_blank" class="social-btn github">
                         <i class="fa-brands fa-github"></i>
@@ -89,7 +97,7 @@
             </div>
         </section>
 
-        <!-- Skills Section -->
+
         <section class="skills-section">
             <h2 class="section-title">Skills</h2>
             <div class="skills-grid">
@@ -132,19 +140,21 @@
             </div>
         </section>
 
-        <!-- Projects Section -->
+
         <section class="projects-section">
             <h2 class="section-title">Projects</h2>
             <div class="projects-grid">
                 <div class="project-card featured" data-aos="fade-up">
-                    <a href="https://github.com/JustLukaBraza/RohamboGameWithFlask-" target="_blank" class="project-link">
+                    <a href="https://github.com/JustLukaBraza/RohamboGameWithFlask-" target="_blank"
+                        class="project-link">
                         <div class="project-icon">
                             <i class="fa-solid fa-hand-back-fist"></i>
                         </div>
                         <div class="project-info">
                             <h3>RohamboMaster</h3>
                             <span class="project-category">Flask Game</span>
-                            <p class="project-description">A modern Rock Paper Scissors game with beautiful UI, leaderboard system, and achievements.</p>
+                            <p class="project-description">A modern Rock Paper Scissors game with beautiful UI,
+                                leaderboard system, and achievements.</p>
                             <div class="project-features">
                                 <span>🎯 Beautiful UI</span>
                                 <span>🏆 Leaderboard</span>
@@ -162,7 +172,8 @@
                         <div class="project-info">
                             <h3>Neon Snake Game</h3>
                             <span class="project-category">Flask Game</span>
-                            <p class="project-description">A modern twist on the classic Snake game with neon aesthetics, power-ups, and multi-device support.</p>
+                            <p class="project-description">A modern twist on the classic Snake game with neon
+                                aesthetics, power-ups, and multi-device support.</p>
                             <div class="project-features">
                                 <span>🌈 Neon Effects</span>
                                 <span>⚡ Power-ups</span>
@@ -173,14 +184,16 @@
                 </div>
 
                 <div class="project-card featured" data-aos="fade-up" data-aos-delay="200">
-                    <a href="https://github.com/JustLukaBraza/geolab-final-project-" target="_blank" class="project-link">
+                    <a href="https://github.com/JustLukaBraza/geolab-final-project-" target="_blank"
+                        class="project-link">
                         <div class="project-icon">
                             <i class="fa-solid fa-store"></i>
                         </div>
                         <div class="project-info">
                             <h3>Flask Store</h3>
                             <span class="project-category">Web Application</span>
-                            <p class="project-description">A modern e-commerce platform built with Flask, featuring a clean interface and secure payment integration.</p>
+                            <p class="project-description">A modern e-commerce platform built with Flask, featuring a
+                                clean interface and secure payment integration.</p>
                             <div class="project-features">
                                 <span>🛍️ E-commerce</span>
                                 <span>💳 Payments</span>
@@ -192,7 +205,7 @@
             </div>
         </section>
 
-        <!-- Contact Section -->
+
         <section class="contact-section">
             <h2 class="section-title">Contact Me</h2>
             <div class="contact-form" data-aos="fade-up">
@@ -223,15 +236,15 @@
     <footer class="footer">
         <div class="footer-content">
             <p>Made with <i class="fa-solid fa-heart"></i> by <span class="creator-name">JustLukaBraza</span></p>
-            <div class="footer-social">
-                <a href="https://github.com/JustLukaBraza" target="_blank" class="social-link">
-                    <i class="fa-brands fa-github"></i>
-                </a>
-            </div>
         </div>
     </footer>
+
+    <div class="scroll-to-top">
+        <i class="fa-solid fa-arrow-up"></i>
+    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
-</html> 
+
+</html>
