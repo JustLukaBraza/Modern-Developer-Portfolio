@@ -1,0 +1,36 @@
+{
+    "name": "Luka Abashidze Portfolio",
+    "short_name": "Luka Abashidze",
+    "description": "Professional portfolio of Luka Abashidze (JustLukaBraza) - Python Developer & Game Creator",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#0A0A0A",
+    "theme_color": "#6B58B7",
+    "orientation": "portrait-primary",
+    "icons": [
+        {
+            "src": "/static/images/favicon.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "categories": ["development", "portfolio", "technology"],
+    "lang": "en",
+    "dir": "ltr",
+    "prefer_related_applications": false,
+    "related_applications": [],
+    "screenshots": [],
+    "shortcuts": [
+        {
+            "name": "Projects",
+            "url": "#projects",
+            "description": "View my projects"
+        },
+        {
+            "name": "Contact",
+            "url": "#contact",
+            "description": "Contact me"
+        }
+    ]
+} 

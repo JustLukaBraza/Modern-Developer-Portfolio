@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+Allow: /static/
+Allow: /static/css/
+Allow: /static/js/
+Allow: /static/images/
+Allow: /static/music/
+Disallow: /admin/
+Disallow: /private/
+Disallow: /temp/
+
+Sitemap: https://justlukabraza.github.io/sitemap.xml 

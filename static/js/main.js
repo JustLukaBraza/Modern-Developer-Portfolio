@@ -93,6 +93,11 @@ function initMusicPlayer() {
 }
 
 function handleKeyboardShortcuts(e) {
+    // Check if the event target is an input or textarea
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+        return; // Don't handle keyboard shortcuts for form inputs
+    }
+
     if (e.code === 'Space') {
         e.preventDefault();
         toggleMusic();
@@ -466,7 +471,14 @@ const translations = {
         message: 'Message',
         send: 'Send Message',
         loading: 'Loading...',
-        madeBy: 'Made with'
+        madeBy: 'Made with',
+        quickLinks: 'Quick Links',
+        connect: 'Connect',
+        skillsLink: 'Skills',
+        projectsLink: 'Projects',
+        contactLink: 'Contact',
+        theme: 'Theme',
+        language: 'Language'
     },
     ka: {
         bio: 'პითონ დეველოპერი და თამაშების შემქმნელი',
@@ -478,7 +490,14 @@ const translations = {
         message: 'შეტყობინება',
         send: 'გაგზავნა',
         loading: 'იტვირთება...',
-        madeBy: 'შექმნა'
+        madeBy: 'შექმნა',
+        quickLinks: 'სწრაფი ბმულები',
+        connect: 'კონტაქტი',
+        skillsLink: 'უნარები',
+        projectsLink: 'პროექტები',
+        contactLink: 'დაკავშირება',
+        theme: 'თემა',
+        language: 'ენა'
     }
 };
 
@@ -488,7 +507,7 @@ function updateLanguage(lang) {
     currentLang = lang;
     localStorage.setItem('language', lang);
     
-    
+    // Update main content
     document.querySelector('.bio').textContent = translations[lang].bio;
     document.querySelector('.section-title:nth-of-type(1)').textContent = translations[lang].skills;
     document.querySelector('.section-title:nth-of-type(2)').textContent = translations[lang].projects;
@@ -498,21 +517,66 @@ function updateLanguage(lang) {
     document.querySelector('label[for="message"]').textContent = translations[lang].message;
     document.querySelector('.submit-btn span').textContent = translations[lang].send;
     document.querySelector('.loading-screen p').textContent = translations[lang].loading;
-    document.querySelector('.footer-content p').textContent = `${translations[lang].madeBy} <i class="fa-solid fa-heart"></i> by <span class="creator-name">JustLukaBraza</span>`;
+    document.querySelector('.footer-copyright p').textContent = `${translations[lang].madeBy} <i class="fa-solid fa-heart"></i> by <span class="creator-name">JustLukaBraza</span>`;
     
+    // Update footer content
+    document.querySelector('.footer-section:nth-child(1) h4').textContent = translations[lang].quickLinks;
+    document.querySelector('.footer-section:nth-child(2) h4').textContent = translations[lang].connect;
+    document.querySelector('.footer-section:nth-child(1) ul li:nth-child(1) a').textContent = translations[lang].skillsLink;
+    document.querySelector('.footer-section:nth-child(1) ul li:nth-child(2) a').textContent = translations[lang].projectsLink;
+    document.querySelector('.footer-section:nth-child(1) ul li:nth-child(3) a').textContent = translations[lang].contactLink;
     
+    // Update language buttons
     langButtons.forEach(btn => {
         btn.classList.toggle('active', btn.dataset.lang === lang);
+        const icon = btn.querySelector('i');
+        if (icon) {
+            icon.style.animation = 'rotate360 0.5s ease';
+            setTimeout(() => {
+                icon.style.animation = '';
+            }, 500);
+        }
+    });
+    
+    // Update footer language buttons
+    langButtonsFooter.forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.lang === lang);
+        const icon = btn.querySelector('i');
+        if (icon) {
+            icon.style.animation = 'rotate360 0.5s ease';
+            setTimeout(() => {
+                icon.style.animation = '';
+            }, 500);
+        }
     });
 }
 
+// Add hover effect to language buttons
 langButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-        updateLanguage(btn.dataset.lang);
+    btn.addEventListener('mouseenter', () => {
+        const icon = btn.querySelector('i');
+        if (icon) {
+            icon.style.animation = 'rotate360 0.5s ease';
+            setTimeout(() => {
+                icon.style.animation = '';
+            }, 500);
+        }
     });
 });
 
+langButtonsFooter.forEach(btn => {
+    btn.addEventListener('mouseenter', () => {
+        const icon = btn.querySelector('i');
+        if (icon) {
+            icon.style.animation = 'rotate360 0.5s ease';
+            setTimeout(() => {
+                icon.style.animation = '';
+            }, 500);
+        }
+    });
+});
 
+// Initialize language
 updateLanguage(currentLang);
 
 
@@ -531,4 +595,39 @@ scrollToTop.addEventListener('click', () => {
         top: 0,
         behavior: 'smooth'
     });
-}); 
+});
+
+// Footer Theme Toggle
+const themeToggleFooter = document.querySelector('.theme-toggle-footer');
+const themeIconFooter = themeToggleFooter.querySelector('i');
+
+themeToggleFooter.addEventListener('click', () => {
+    const currentTheme = html.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    
+    html.setAttribute('data-theme', newTheme);
+    themeIconFooter.className = newTheme === 'dark' ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
+    
+    localStorage.setItem('theme', newTheme);
+    
+    themeIconFooter.style.animation = 'rotate360 0.5s ease';
+    setTimeout(() => {
+        themeIconFooter.style.animation = '';
+    }, 500);
+});
+
+// Footer Language Switcher
+const langButtonsFooter = document.querySelectorAll('.lang-btn-footer');
+
+langButtonsFooter.forEach(btn => {
+    btn.addEventListener('click', () => {
+        updateLanguage(btn.dataset.lang);
+    });
+});
+
+// Update footer language buttons
+function updateFooterLanguageButtons(lang) {
+    langButtonsFooter.forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.lang === lang);
+    });
+} 
