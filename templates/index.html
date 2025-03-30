@@ -38,17 +38,30 @@
 <body>
     <script src="https://kit.fontawesome.com/69a4d56f18.js" crossorigin="anonymous"></script>
 
-
     <div class="music-player">
         <div class="music-controls">
-            <button class="music-btn" id="musicToggle">
+            <button id="musicToggle" class="music-btn">
                 <i class="fa-solid fa-play"></i>
             </button>
+            <div class="music-info">
+                <div class="music-title">Dasi</div>
+                <div class="music-artist">JustLukaBraza</div>
+            </div>
+            <div class="music-options">
+                <i class="fa-solid fa-shuffle shuffle-icon"></i>
+                <i class="fa-solid fa-repeat repeat-icon"></i>
+            </div>
         </div>
-        <div class="music-info">
-            <div class="music-title">IV დასი - მორიგი სესია            </div>
-            <div class="music-artist">JustLukaBraza</div>
+        <div class="music-progress">
+            <div id="musicProgress" class="music-progress-bar"></div>
         </div>
+        <div class="volume-control">
+            <i id="volumeIcon" class="fa-solid fa-volume-high volume-icon"></i>
+            <div class="volume-slider">
+                <div id="volumeProgress" class="volume-progress"></div>
+            </div>
+        </div>
+        <audio id="musicPlayer" src="{{ url_for('static', filename='music/dasi.mp3') }}" loop autoplay preload="auto"></audio>
     </div>
 
 
@@ -206,29 +219,31 @@
         </section>
 
 
-        <section class="contact-section">
-            <h2 class="section-title">Contact Me</h2>
-            <div class="contact-form" data-aos="fade-up">
-                <form id="contactForm">
-                    <div class="form-group">
-                        <input type="text" id="name" name="name" required>
-                        <label for="name">Name</label>
-                        <div class="form-line"></div>
+        <section id="contact" class="contact-section">
+            <div class="container">
+                <h2 class="section-title">Contact Me</h2>
+                <div class="contact-content">
+                    <div class="contact-info">
                     </div>
-                    <div class="form-group">
-                        <input type="email" id="email" name="email" required>
-                        <label for="email">Email</label>
-                        <div class="form-line"></div>
-                    </div>
-                    <div class="form-group">
-                        <textarea id="message" name="message" required></textarea>
-                        <label for="message">Message</label>
-                    </div>
-                    <button type="submit" class="submit-btn">
-                        <span>Send Message</span>
-                        <i class="fa-solid fa-paper-plane"></i>
-                    </button>
-                </form>
+                    <form id="contactForm" action="https://formsubmit.co/lukaabashidze52@gmail.com" method="POST" class="contact-form">
+                        <div class="form-group">
+                            <input type="text" id="name" name="name" required>
+                            <label for="name">Name</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" required>
+                            <label for="email">Email</label>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="message" name="message" required></textarea>
+                            <label for="message">Message</label>
+                        </div>
+                        <button type="submit" class="submit-btn">
+                            <span>Send Message</span>
+                            <i class="fa-solid fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
             </div>
         </section>
     </div>
