@@ -93,9 +93,9 @@ function initMusicPlayer() {
 }
 
 function handleKeyboardShortcuts(e) {
-    // Check if the event target is an input or textarea
+    
     if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
-        return; // Don't handle keyboard shortcuts for form inputs
+        return; 
     }
 
     if (e.code === 'Space') {
@@ -507,7 +507,7 @@ function updateLanguage(lang) {
     currentLang = lang;
     localStorage.setItem('language', lang);
     
-    // Update main content
+    
     document.querySelector('.bio').textContent = translations[lang].bio;
     document.querySelector('.section-title:nth-of-type(1)').textContent = translations[lang].skills;
     document.querySelector('.section-title:nth-of-type(2)').textContent = translations[lang].projects;
@@ -519,14 +519,14 @@ function updateLanguage(lang) {
     document.querySelector('.loading-screen p').textContent = translations[lang].loading;
     document.querySelector('.footer-copyright p').textContent = `${translations[lang].madeBy} <i class="fa-solid fa-heart"></i> by <span class="creator-name">JustLukaBraza</span>`;
     
-    // Update footer content
+    
     document.querySelector('.footer-section:nth-child(1) h4').textContent = translations[lang].quickLinks;
     document.querySelector('.footer-section:nth-child(2) h4').textContent = translations[lang].connect;
     document.querySelector('.footer-section:nth-child(1) ul li:nth-child(1) a').textContent = translations[lang].skillsLink;
     document.querySelector('.footer-section:nth-child(1) ul li:nth-child(2) a').textContent = translations[lang].projectsLink;
     document.querySelector('.footer-section:nth-child(1) ul li:nth-child(3) a').textContent = translations[lang].contactLink;
     
-    // Update language buttons
+    
     langButtons.forEach(btn => {
         btn.classList.toggle('active', btn.dataset.lang === lang);
         const icon = btn.querySelector('i');
@@ -538,7 +538,7 @@ function updateLanguage(lang) {
         }
     });
     
-    // Update footer language buttons
+    
     langButtonsFooter.forEach(btn => {
         btn.classList.toggle('active', btn.dataset.lang === lang);
         const icon = btn.querySelector('i');
@@ -551,7 +551,7 @@ function updateLanguage(lang) {
     });
 }
 
-// Add hover effect to language buttons
+
 langButtons.forEach(btn => {
     btn.addEventListener('mouseenter', () => {
         const icon = btn.querySelector('i');
@@ -576,7 +576,7 @@ langButtonsFooter.forEach(btn => {
     });
 });
 
-// Initialize language
+
 updateLanguage(currentLang);
 
 
@@ -597,7 +597,7 @@ scrollToTop.addEventListener('click', () => {
     });
 });
 
-// Footer Theme Toggle
+
 const themeToggleFooter = document.querySelector('.theme-toggle-footer');
 const themeIconFooter = themeToggleFooter.querySelector('i');
 
@@ -616,7 +616,7 @@ themeToggleFooter.addEventListener('click', () => {
     }, 500);
 });
 
-// Footer Language Switcher
+
 const langButtonsFooter = document.querySelectorAll('.lang-btn-footer');
 
 langButtonsFooter.forEach(btn => {
@@ -625,7 +625,7 @@ langButtonsFooter.forEach(btn => {
     });
 });
 
-// Update footer language buttons
+
 function updateFooterLanguageButtons(lang) {
     langButtonsFooter.forEach(btn => {
         btn.classList.toggle('active', btn.dataset.lang === lang);

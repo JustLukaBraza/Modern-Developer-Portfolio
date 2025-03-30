@@ -1998,7 +1998,7 @@ body {
     color: var(--text-primary);
 }
 
-/* Mobile Responsive Footer */
+
 @media (max-width: 768px) {
     .footer {
         padding: 1.5rem 0;
@@ -2042,7 +2042,7 @@ body {
     }
 }
 
-/* Additional Mobile Optimizations */
+
 @media (max-width: 480px) {
     .footer-social a {
         width: 35px;
@@ -2068,7 +2068,7 @@ body {
     }
 }
 
-/* Dark Mode Enhancements */
+
 [data-theme="dark"] .footer {
     background: var(--bg-secondary);
     border-top-color: rgba(255, 255, 255, 0.1);
@@ -2084,7 +2084,7 @@ body {
     border-color: var(--accent-color);
 }
 
-/* Animation for Footer Links */
+
 .footer-links a {
     position: relative;
     overflow: hidden;
@@ -2105,7 +2105,7 @@ body {
     width: 100%;
 }
 
-/* Footer Section Hover Effect */
+
 .footer-section {
     transition: transform 0.3s ease;
 }
@@ -2114,7 +2114,7 @@ body {
     transform: translateY(-5px);
 }
 
-/* Responsive Grid Adjustments */
+
 @media (min-width: 769px) and (max-width: 1024px) {
     .footer-content {
         grid-template-columns: repeat(2, 1fr);
@@ -2215,7 +2215,7 @@ body {
     }
 }
 
-/* Icon Styles */
+
 .fa-solid,
 .fa-brands {
     display: inline-block;
@@ -2229,7 +2229,7 @@ body {
     vertical-align: middle;
 }
 
-/* Social Icons */
+
 .social-btn i {
     font-size: 1.5em;
     transition: transform 0.3s ease;
@@ -2239,18 +2239,18 @@ body {
     transform: scale(1.2);
 }
 
-/* Language Switcher Icons */
+
 .lang-btn i {
     margin-right: 8px;
     font-size: 1.1em;
 }
 
-/* Theme Toggle Icon */
+
 .theme-btn i {
     font-size: 1.3em;
 }
 
-/* Music Player Icons */
+
 .music-controls i {
     font-size: 1.2em;
     cursor: pointer;
@@ -2261,13 +2261,13 @@ body {
     cursor: pointer;
 }
 
-/* Skill Icons */
+
 .skill-header i {
     font-size: 1.5em;
     margin-right: 10px;
 }
 
-/* Project Icons */
+
 .project-icon i {
     font-size: 2em;
 } 

@@ -9,15 +9,15 @@ from logging.handlers import RotatingFileHandler
 from datetime import datetime
 import json
 
-# Initialize Flask app
+
 app = Flask(__name__)
 app.wsgi_app = ProxyFix(app.wsgi_app)
 
-# Configure app
+
 app.config.update(
     SECRET_KEY=os.environ.get('SECRET_KEY', 'your-secret-key-here'),
-    SEND_FILE_MAX_AGE_DEFAULT=31536000,  # 1 year
-    MAX_CONTENT_LENGTH=16 * 1024 * 1024,  # 16MB max file size
+    SEND_FILE_MAX_AGE_DEFAULT=31536000,  
+    MAX_CONTENT_LENGTH=16 * 1024 * 1024,  
     COMPRESS_ALGORITHM='gzip',
     COMPRESS_LEVEL=6,
     COMPRESS_MIN_SIZE=500,
@@ -25,7 +25,7 @@ app.config.update(
     CACHE_DEFAULT_TIMEOUT=300
 )
 
-# Initialize extensions
+
 cache = Cache(app)
 Compress(app)
 Talisman(app, 
@@ -41,7 +41,7 @@ Talisman(app,
     }
 )
 
-# Configure logging
+
 if not os.path.exists('logs'):
     os.mkdir('logs')
 file_handler = RotatingFileHandler('logs/portfolio.log', maxBytes=10240, backupCount=10)
@@ -53,7 +53,7 @@ app.logger.addHandler(file_handler)
 app.logger.setLevel(logging.INFO)
 app.logger.info('Portfolio startup')
 
-# Load translations
+
 def load_translations():
     try:
         with open('static/translations.json', 'r', encoding='utf-8') as f:
@@ -64,7 +64,7 @@ def load_translations():
 
 translations = load_translations()
 
-# Error handlers
+
 @app.errorhandler(404)
 def not_found_error(error):
     return render_template('404.html'), 404
@@ -78,7 +78,7 @@ def internal_error(error):
 def too_large(e):
     return jsonify({'error': 'File too large'}), 413
 
-# Routes
+
 @app.route('/')
 @cache.cached(timeout=300)
 def index():
@@ -119,7 +119,7 @@ def favicon():
     return send_from_directory(os.path.join(app.root_path, 'static/images'),
                              'favicon.svg', mimetype='image/svg+xml')
 
-# Contact form handler
+
 @app.route('/contact', methods=['POST'])
 def contact():
     try:
@@ -127,23 +127,23 @@ def contact():
         if not data:
             return jsonify({'error': 'No data provided'}), 400
         
-        # Log contact attempt
+        
         app.logger.info(f'Contact form submission from {data.get("email", "unknown")}')
         
-        # Here you would typically send the email
-        # For now, we'll just return success
+        
+        
         return jsonify({'message': 'Message sent successfully'}), 200
     except Exception as e:
         app.logger.error(f'Error processing contact form: {e}')
         return jsonify({'error': 'Internal server error'}), 500
 
-# Cache control headers
+
 @app.after_request
 def add_header(response):
     if 'Cache-Control' not in response.headers:
         response.headers['Cache-Control'] = 'public, max-age=300'
     return response
 
-# Development server
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True) 
